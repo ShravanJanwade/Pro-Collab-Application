@@ -76,4 +76,22 @@ public class EmailService {
     public void sendEmail(String to, String subject, String text) {
         sendHtmlEmail(to, subject, text);
     }
+
+    public void sendInviteMail(String email,String password){
+        String emailSubject = "Welocome to ProCollab";
+        String emailContent = "<html><body>" +
+                "<h2>Welcome to ProCollab!</h2>" +
+                "<p>Dear User,</p>" +
+                "<p>You've been added to ProCollab. You can access the app with the below credentials:</p>"
+                +
+                "<p>Username:\""+email+"\"</p>" +
+                "<p>Password:\""+password+"\"</p>" +
+                "<p>If you have any questions or need assistance, please contact us at <a href=\"mailto:support@procollab.com\">support@procollab.com</a>.</p>"
+                +
+                "<p>Best regards,</p>" +
+                "<p>The ProCollab Team</p>" +
+                "</body></html>";
+
+        sendHtmlEmail(email, emailSubject, emailContent);
+    }
 }

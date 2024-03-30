@@ -57,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .logoutSuccessUrl("/login");
 
                 http.csrf().ignoringAntMatchers("/h2-console/**", "/notes/**", "/forgot-password", "/reset-password",
-                                "/company/**", "/projects/**", "/dashboard/**", "/websocket", "/project/**");
+                                "/company/**", "/projects/**", "/dashboard/**", "/websocket", "/project/**","/upload/fromExcel");
                 http.headers().frameOptions().sameOrigin();
         }
 
