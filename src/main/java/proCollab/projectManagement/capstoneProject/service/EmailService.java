@@ -81,7 +81,7 @@ public class EmailService {
                 "<p>The ProCollab Team</p>" +
                 "</body></html>";
 
-        // sendHtmlEmail(to, emailSubject, emailContent);
+        sendHtmlEmail(to, emailSubject, emailContent);
     }
 
     // Send an email

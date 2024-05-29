@@ -188,9 +188,10 @@
             </td>
 
             <td>
-              <a th:href="@{'/projects/projectTasks/' + ${t.project.id} + '/taskDetails/' + ${t.id}}">Task Details</a>
+              <a th:href="@{'/projects/projectTasks/' + ${t?.project?.id} + '/taskDetails/' + ${t?.id}}">Task Details</a>
               <!-- <button class="info-button" onclick="showModal(this)" th:attr="data-taskid=${t.id}"><img class="infoimg" src="/images/icons8-info.svg" alt=""></button> -->
             </td>
+            
           </tr>
 
           <tr th:if="${user.tasksOwned.size()==0}">

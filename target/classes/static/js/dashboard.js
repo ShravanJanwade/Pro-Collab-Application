@@ -18,8 +18,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Update progress value
     const progressElement = document.getElementById("progress-value");
     if (progressElement) {
-      progressElement.innerText = `${data.progress}%`;
+      const progress = !isNaN(data.progress) ? data.progress : 0;
+      progressElement.innerText = `${progress}%`;
     }
+    
 
     // Update remaining tasks value
     const remainingTasksElement = document.getElementById(
@@ -283,7 +285,7 @@ fetch("/dashboard/allData")
     const totalTasks = data.totalTasks;
     const taskProgress = data.taskProgress;
     const completedProjects = data.completedProjects;
-    const tasksInProject=data.tasksInProjects;
+    const tasksInProject = data.tasksInProjects;
 
     // Create Pie Chart
     new Chart(document.getElementById("pieChart"), {
@@ -367,7 +369,9 @@ fetch("/dashboard/allData")
         },
       },
     });
-    const projectLabelsTasks = Object.keys(tasksInProject).map((name) => `${name}`);
+    const projectLabelsTasks = Object.keys(tasksInProject).map(
+      (name) => `${name}`
+    );
     const projectDataTasks = Object.values(tasksInProject);
     new Chart(document.getElementById("lineChartTasks"), {
       type: "line",
@@ -399,7 +403,3 @@ fetch("/dashboard/allData")
       },
     });
   });
-
-
-
-
