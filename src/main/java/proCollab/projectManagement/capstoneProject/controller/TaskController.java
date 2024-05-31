@@ -76,7 +76,7 @@ public class TaskController {
             SecurityContextHolderAwareRequestWrapper request) {
         String email = principal.getName();
         User signedUser = userService.getUserByEmail(email);
-        boolean isAdminSigned = request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("Role_SUPERADMIN");
+        boolean isAdminSigned = request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_SUPERADMIN");
         List<User> allUsers = companyService.getCompanyUsers(signedUser.getCompany().getId());
         List<Task> allTask = companyService.getAllTaskByCompany(signedUser.getCompany().getId());
         List<Project> usersProjects = userService.getUserProjects(signedUser);
@@ -85,13 +85,12 @@ public class TaskController {
         Iterator<Task> taskIterator = allTask.iterator();
         while (taskIterator.hasNext()) {
             Task t = taskIterator.next();
-            if (t.getCreatedUser() != signedUser) {
-                taskIterator.remove();
-            }
-            if (t.getProject() != null && !usersProjects.contains(t.getProject())) {
+            if (t.getCreatedUser() != signedUser
+                    || (t.getProject() != null && !usersProjects.contains(t.getProject()))) {
                 taskIterator.remove();
             }
         }
+
         model.addAttribute("tasks", allTask);
         model.addAttribute("users", allUsers);
         model.addAttribute("signedUser", signedUser);
@@ -103,7 +102,7 @@ public class TaskController {
             SecurityContextHolderAwareRequestWrapper request) {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
-
+                
         Task task = new Task();
         task.setCreatorName(user.getName());
         task.setCreatedUser(user);
