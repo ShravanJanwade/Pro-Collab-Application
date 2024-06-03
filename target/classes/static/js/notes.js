@@ -32,10 +32,15 @@ function openDeleteModal() {
   document.getElementById("deleteNoteModal").style.display = "block";
 }
 
-function closeDeleteModal() {
-  document.getElementById("deleteNoteModal").style.display = "none";
-}
+function closeModal() {
+  const modal = document.getElementById('noteModal');
+  modal.style.display = 'none';
 
+  // Exit fullscreen mode if currently in fullscreen
+  if (document.fullscreenElement) {
+      document.exitFullscreen();
+  }
+}
 function confirmDelete() {
   // Get the note ID from the global variable
   var noteId = window.currentNoteId;
@@ -68,4 +73,14 @@ function confirmDelete() {
 function getCsrfToken() {
   var csrfTokenElement = document.querySelector("meta[name='_csrf']");
   return csrfTokenElement ? csrfTokenElement.getAttribute("content") : null;
+}
+function toggleFullScreen(button) {
+  const modalContent = button.parentElement;
+  if (!document.fullscreenElement) {
+      modalContent.requestFullscreen().catch(err => {
+          alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+      });
+  } else {
+      document.exitFullscreen();
+  }
 }

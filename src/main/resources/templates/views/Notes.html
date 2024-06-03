@@ -44,9 +44,10 @@
 </div>
 
   <!-- Modal for displaying full note details -->
-<div id="noteModal" class="custom-modal">
+  <div id="noteModal" class="custom-modal">
     <div class="modal-content">
         <span class="close-icon" onclick="closeModal()">&times;</span>
+        <span class="fullscreen-icon" onclick="toggleFullScreen(this)" style="cursor: pointer;">&#x26F6;</span>
         <h2 class="modal-title" id="modal-title"></h2>
         <!-- Use th:utext to render HTML content -->
         <p class="modal-description" id="modal-description" th:utext="${modalDescription}"></p>
@@ -56,7 +57,6 @@
         </div>
     </div>
 </div>
-
     <!-- Modal for confirming note deletion -->
 <div id="deleteNoteModal" class="custom-modal">
     <div class="modal-content">
